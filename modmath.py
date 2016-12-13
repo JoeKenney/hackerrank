@@ -1,3 +1,7 @@
+def lcm(a,b):
+    (g,x,y) = gcd(a,b)
+    return a*b//g
+
 def gcd(a,b):
     if a>b:
         (m,x,y)=gcd(b,a)
@@ -6,7 +10,7 @@ def gcd(a,b):
         return (b,0,1)
     else:
         (x,y,z) = gcd(b%a,a)
-        return (x, z-(b/a)*y,y)
+        return (x, z-int(b/a)*y,y)
         
 def mult_mod_inverse(a,m):
     (x,y,z) = gcd(a,m)
@@ -23,6 +27,7 @@ def prime_sieve(m):
         
         primes.append(p)
         l = [z for z in l if z%p !=0]
+
     return primes
     
 def factor(m):
@@ -32,10 +37,17 @@ def factor(m):
         while m%p ==0:
             factors.append(p)
             m = m/p
+    if m != 1:
+        factors.append(m)
     return factors
     
-def totient(m):
-    p = [1-1.0/z for z in set(factor(m())]
-    	return m*prod(p)
-    	
+#def totient(m):
+#    p = [1-1.0/z for z in set(factor(m))]
+#    	return m*prod(p)
+
+def powmod(a,x,m):
+    if x == 0:
+         return 1
+    else:
+         return (a**(x%2))*powmod((a*a)%m,int(x/2),m)%m
     
